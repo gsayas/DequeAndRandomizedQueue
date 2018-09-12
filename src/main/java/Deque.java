@@ -1,4 +1,6 @@
-public class Deque<T> {
+import java.util.Iterator;
+
+public class Deque<T> implements Iterable<T> {
 
     private class Node {
         T item;
@@ -94,4 +96,26 @@ public class Deque<T> {
     public boolean isEmpty() {
         return size() == 0;
     }
+
+    public Iterator<T> iterator(){
+        return new ListIterator();
+    }
+
+    private class ListIterator implements Iterator<T>
+    {
+        private Node current = first;
+        public boolean hasNext() { return current != null; }
+        public void remove() { throw new java.lang.UnsupportedOperationException(); }
+        public T next()
+        {
+            if(hasNext()) {
+                T item = current.item;
+                current = current.next;
+                return item;
+            }else{
+                throw new java.util.NoSuchElementException();
+            }
+        }
+    }
+
 }

@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
@@ -100,5 +102,48 @@ public class DequeTest {
         String s = deque.removeLast();
         assertEquals("item2", s);
         assertEquals(1, deque.size());
+    }
+
+    @Test
+    public void testRemoveOnIterator() {
+        try{
+            Iterator<String> it = deque.iterator();
+            it.remove();
+        }catch (Exception ex){
+            assertEquals(java.lang.UnsupportedOperationException.class, ex.getClass());
+        }
+    }
+
+    @Test
+    public void testIteratorWhenNotEmpty() {
+        deque.addFirst("item2");
+        deque.addFirst("item1");
+        Iterator<String> it = deque.iterator();
+
+        String s = it.next();
+        assertEquals("item1", s);
+
+        s = it.next();
+        assertEquals("item2", s);
+
+        try{
+            s = it.next();
+        }catch (Exception ex){
+            assertEquals(java.util.NoSuchElementException.class, ex.getClass());
+        }
+    }
+
+    @Test
+    public void testHasNext() {
+        Iterator<String> it = deque.iterator();
+        assertFalse(it.hasNext());
+
+        deque.addFirst("item2");
+        Iterator<String> it2 = deque.iterator();
+        assertFalse(it.hasNext());
+        assertTrue(it2.hasNext());
+        String s = it2.next();
+
+        assertFalse(it2.hasNext());
     }
 }
