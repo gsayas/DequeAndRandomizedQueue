@@ -23,6 +23,10 @@ public class Deque<T> implements Iterable<T> {
     }
 
     public void addFirst(T item) {
+        if(item == null){
+            throw new java.lang.IllegalArgumentException();
+        }
+
         Node oldFirst = first;
 
         first = new Node();
@@ -40,6 +44,10 @@ public class Deque<T> implements Iterable<T> {
     }
 
     public void addLast(T item) {
+        if(item == null){
+            throw new java.lang.IllegalArgumentException();
+        }
+
         if(isEmpty()){
             addFirst(item);
         }else{
@@ -70,6 +78,8 @@ public class Deque<T> implements Iterable<T> {
 
             if(size() > 1){
                 first.previous = null;
+            }else{
+                last = first = null;
             }
 
             size--;
@@ -86,6 +96,8 @@ public class Deque<T> implements Iterable<T> {
 
             if(size() > 1){
                 last.next = null;
+            }else{
+                last = first = null;
             }
 
             size--;

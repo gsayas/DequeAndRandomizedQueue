@@ -3,9 +3,8 @@ import org.junit.Test;
 
 import java.util.Iterator;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class DequeTest {
 
@@ -33,6 +32,24 @@ public class DequeTest {
         deque.addFirst("Item1");
         assertEquals(1, deque.size());
         assertFalse(deque.isEmpty());
+    }
+
+    @Test
+    public void testAddNullArgument() {
+        try{
+            deque.addFirst(null);
+            deque.addLast(null);
+            assertTrue(false);
+        }catch(Exception ex){
+            assertEquals(java.lang.IllegalArgumentException.class, ex.getClass());
+        }
+
+        try{
+            deque.addLast(null);
+            assertTrue(false);
+        }catch(Exception ex){
+            assertEquals(java.lang.IllegalArgumentException.class, ex.getClass());
+        }
     }
 
     @Test
