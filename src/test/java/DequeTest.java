@@ -75,11 +75,12 @@ public class DequeTest {
 
     @Test
     public void testRemoveFirstWhenNotEmpty() {
+        deque.addLast("item2");
         deque.addFirst("item1");
-        assertEquals(1, deque.size());
+        assertEquals(2, deque.size());
         String s = deque.removeFirst();
         assertEquals("item1", s);
-        assertEquals(0, deque.size());
+        assertEquals(1, deque.size());
     }
 
     @Test
@@ -93,10 +94,11 @@ public class DequeTest {
 
     @Test
     public void testRemoveLastWhenNotEmpty() {
-        deque.addLast("item1");
-        assertEquals(1, deque.size());
+        deque.addFirst("item1");
+        deque.addLast("item2");
+        assertEquals(2, deque.size());
         String s = deque.removeLast();
-        assertEquals("item1", s);
-        assertEquals(0, deque.size());
+        assertEquals("item2", s);
+        assertEquals(1, deque.size());
     }
 }
