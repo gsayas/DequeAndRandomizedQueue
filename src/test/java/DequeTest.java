@@ -21,7 +21,7 @@ public class DequeTest {
 
     @Test
     public void testSize() {
-        assertEquals(deque.size(), 0);
+        assertEquals(0, deque.size());
     }
 
     @Test
@@ -29,18 +29,18 @@ public class DequeTest {
         assertTrue(deque.isEmpty());
 
         deque.addFirst("Item1");
-        assertEquals(deque.size(), 1);
+        assertEquals(1, deque.size());
         assertFalse(deque.isEmpty());
     }
 
     @Test
     public void testAddFirstWhenNotEmpty() {
         deque.addFirst("Item1");
-        assertEquals(deque.size(), 1);
+        assertEquals(1, deque.size());
         assertFalse(deque.isEmpty());
 
         deque.addFirst("Item2");
-        assertEquals(deque.size(), 2);
+        assertEquals(2, deque.size());
         assertFalse(deque.isEmpty());
     }
 
@@ -49,18 +49,38 @@ public class DequeTest {
         assertTrue(deque.isEmpty());
 
         deque.addLast("Item1");
-        assertEquals(deque.size(), 1);
+        assertEquals(1, deque.size());
         assertFalse(deque.isEmpty());
     }
 
     @Test
     public void testAddLastWhenNotEmpty() {
         deque.addFirst("Item1");
-        assertEquals(deque.size(), 1);
+        assertEquals(1, deque.size());
         assertFalse(deque.isEmpty());
 
         deque.addLast("Item2");
-        assertEquals(deque.size(), 2);
+        assertEquals(2, deque.size());
         assertFalse(deque.isEmpty());
     }
+
+    @Test
+    public void testRemoveFirstWhenEmpty() {
+        try{
+            deque.removeFirst();
+        }catch (Exception ex){
+            assertEquals(java.util.NoSuchElementException.class, ex.getClass());
+        }
+    }
+
+    @Test
+    public void testRemoveFirstWhenNotEmpty() {
+        deque.addFirst("item1");
+        assertEquals(1, deque.size());
+        String s = deque.removeFirst();
+        assertEquals("item1", s);
+        assertEquals(0, deque.size());
+    }
+
+
 }

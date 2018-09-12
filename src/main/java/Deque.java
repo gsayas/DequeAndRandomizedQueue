@@ -45,7 +45,7 @@ public class Deque<T> {
         }
     }
 
-    public void addLastWhenNotEmpty(T item){
+    private void addLastWhenNotEmpty(T item){
         Node oldLast = last;
 
         last = new Node();
@@ -56,6 +56,23 @@ public class Deque<T> {
         oldLast.next = last;
 
         size++;
+    }
+
+
+    public T removeFirst() {
+        if(isEmpty()){
+            throw new java.util.NoSuchElementException();
+        }else{
+            Node currentFirst = first;
+            first = currentFirst.next;
+
+            if(size() > 1){
+                first.previous = null;
+            }
+
+            size--;
+            return currentFirst.item;
+        }
     }
 
     public boolean isEmpty() {
