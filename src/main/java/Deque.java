@@ -75,6 +75,22 @@ public class Deque<T> {
         }
     }
 
+    public T removeLast() {
+        if(isEmpty()){
+            throw new java.util.NoSuchElementException();
+        }else{
+            Node currentLast = last;
+            last = currentLast.previous;
+
+            if(size() > 1){
+                last.next = null;
+            }
+
+            size--;
+            return currentLast.item;
+        }
+    }
+
     public boolean isEmpty() {
         return size() == 0;
     }

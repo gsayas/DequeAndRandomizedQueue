@@ -82,5 +82,21 @@ public class DequeTest {
         assertEquals(0, deque.size());
     }
 
+    @Test
+    public void testRemoveLastWhenEmpty() {
+        try{
+            deque.removeLast();
+        }catch (Exception ex){
+            assertEquals(java.util.NoSuchElementException.class, ex.getClass());
+        }
+    }
 
+    @Test
+    public void testRemoveLastWhenNotEmpty() {
+        deque.addLast("item1");
+        assertEquals(1, deque.size());
+        String s = deque.removeLast();
+        assertEquals("item1", s);
+        assertEquals(0, deque.size());
+    }
 }
