@@ -20,6 +20,8 @@ public class RandomizedQueue<T> {
     }
 
     public void enqueue(T item) {
+        if(item == null) throw new java.lang.IllegalArgumentException();
+
         if (size() == array.length) resize(2 * array.length);
         array[tail++] = item;
     }
@@ -29,11 +31,11 @@ public class RandomizedQueue<T> {
         T[] copy = (T[]) new Object[capacity];
 
         for (int i = head; i < tail; i++)
-            copy[i] = array[i];
+            copy[tail-i] = array[i];
         array = copy;
 
         if( isShrinking(capacity) ) {
-            resetIndices(capacity);
+            resetIndices();
         }
     }
 
@@ -41,7 +43,7 @@ public class RandomizedQueue<T> {
         return capacity < array.length;
     }
 
-    private void resetIndices(int capacity){
+    private void resetIndices(){
         tail -= head;
         head = 0;
     }
