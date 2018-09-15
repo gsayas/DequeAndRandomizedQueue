@@ -1,6 +1,8 @@
 import edu.princeton.cs.algs4.StdRandom;
 
-public class RandomizedQueue<T> {
+import java.util.Iterator;
+
+public class RandomizedQueue<T> implements Iterable<T> {
 
     T[] array;
     private int head, tail;
@@ -33,8 +35,8 @@ public class RandomizedQueue<T> {
     {
         T[] copy = (T[]) new Object[capacity];
 
-        for (int i = head; i < tail; i++)
-            copy[tail - i - 1] = array[i];
+        for (int i = head, j= 0; i < tail; i++, j++)
+            copy[j] = array[i];
 
         array = copy;
 
@@ -68,5 +70,44 @@ public class RandomizedQueue<T> {
 
         int randomIndex = StdRandom.uniform(head, tail);
         return array[randomIndex];
+    }
+
+    public Iterator<T> iterator() {
+        return new RandomIterator();
+    }
+
+    private class RandomIterator implements Iterator<T> {
+
+        private T[] iteratorArray;
+        private int currentIndex;
+
+        public RandomIterator() {
+            iteratorArray = (T[]) new Object[size()];
+            currentIndex = -1;
+
+            for (int i = head, j = 0; i < tail; i++, j++)
+                iteratorArray[j] = array[i];
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !isEmpty() && currentIndex + 1 < iteratorArray.length;
+        }
+
+        @Override
+        public T next() {
+            if(hasNext()) {
+                currentIndex++;
+                T item = iteratorArray[currentIndex];
+                return item;
+            }else{
+                throw new java.util.NoSuchElementException();
+            }
+        }
+
+        @Override
+        public void remove() {
+            throw new java.lang.UnsupportedOperationException();
+        }
     }
 }

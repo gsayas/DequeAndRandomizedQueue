@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -141,5 +143,41 @@ public class RandomizedQueueTest {
         queue.dequeue();
         assertEquals(0, queue.size());
         assertTrue(queue.isEmpty());
+    }
+
+    @Test
+    public void testGetIterator() {
+        assertTrue(queue.isEmpty());
+        Iterator<String> it = queue.iterator();
+        assertFalse(it.hasNext());
+        queue.enqueue("item1");
+        queue.enqueue("item2");
+        queue.enqueue("item3");
+        it = queue.iterator();
+        String s = it.next();
+        assertEquals("item1", s);
+        s = it.next();
+        s = it.next();
+        assertEquals("item3", s);
+        assertFalse(it.hasNext());
+
+        try{
+            s = it.next();
+            assertEquals(true, false);
+        }catch (Exception e){
+            assertEquals(java.util.NoSuchElementException.class, e.getClass());
+        }
+    }
+
+    @Test
+    public void testRemoveOnIterator() {
+        Iterator<String> it = queue.iterator();
+
+        try{
+            it.remove();
+            assertEquals(true, false);
+        }catch (Exception e){
+            assertEquals(java.lang.UnsupportedOperationException.class, e.getClass());
+        }
     }
 }
