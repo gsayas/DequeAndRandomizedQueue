@@ -20,7 +20,7 @@ public class RandomizedQueueTest {
     }
 
     @Test
-    public void testsize() {
+    public void testSize() {
         assertEquals(0, queue.size());
     }
 
@@ -53,7 +53,7 @@ public class RandomizedQueueTest {
 
         String s = queue.dequeue();
         assertEquals(1, queue.size());
-        assertEquals("item1", s);
+        //assertEquals("item1", s);
     }
 
     @Test

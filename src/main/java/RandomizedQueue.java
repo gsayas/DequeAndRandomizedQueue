@@ -43,9 +43,17 @@ public class RandomizedQueue<T> {
     }
 
     public T dequeue() {
+        moveRandomItemToHead();
         T item = array[head];
         array[head++] = null;
         if (size() > 0 && size() == array.length/4) resize(array.length/2);
         return item;
+    }
+
+    private void moveRandomItemToHead() {
+        int randomIndex = StdRandom.uniform(head, tail);
+        T currentHead = array[head];
+        array[head] = array[randomIndex];
+        array[randomIndex] = currentHead;
     }
 }
