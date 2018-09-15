@@ -134,5 +134,12 @@ public class RandomizedQueueTest {
         queue.dequeue();
         queue.dequeue();
         assertEquals(3, queue.size());
+        queue.dequeue();
+        assertEquals(2, queue.size());
+        queue.dequeue();
+        assertEquals(1, queue.size());
+        queue.dequeue();
+        assertEquals(0, queue.size());
+        assertTrue(queue.isEmpty());
     }
 }

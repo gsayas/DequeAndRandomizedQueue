@@ -58,10 +58,6 @@ public class RandomizedQueue<T> {
 
     private void moveRandomItemToHead() {
         int randomIndex = StdRandom.uniform(head, tail);
-        System.out.println("Index:" + randomIndex);
-        System.out.println("length:" + array.length);
-        System.out.println("tail:" + tail);
-        System.out.println("");
         T currentHead = array[head];
         array[head] = array[randomIndex];
         array[randomIndex] = currentHead;
