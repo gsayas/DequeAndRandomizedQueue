@@ -155,10 +155,10 @@ public class RandomizedQueueTest {
         queue.enqueue("item3");
         it = queue.iterator();
         String s = it.next();
-        assertEquals("item1", s);
+        assertEquals(5, s.length());
         s = it.next();
         s = it.next();
-        assertEquals("item3", s);
+        assertEquals(5, s.length());
         assertFalse(it.hasNext());
 
         try{

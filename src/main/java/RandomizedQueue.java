@@ -1,6 +1,7 @@
 import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.Iterator;
+import java.util.Random;
 
 public class RandomizedQueue<T> implements Iterable<T> {
 
@@ -87,6 +88,8 @@ public class RandomizedQueue<T> implements Iterable<T> {
 
             for (int i = head, j = 0; i < tail; i++, j++)
                 iteratorArray[j] = array[i];
+
+            StdRandom.shuffle(iteratorArray);
         }
 
         @Override
