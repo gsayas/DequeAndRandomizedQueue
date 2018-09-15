@@ -1,7 +1,7 @@
 import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.Iterator;
-import java.util.Random;
+import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<T> implements Iterable<T> {
 
