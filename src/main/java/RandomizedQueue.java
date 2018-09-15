@@ -22,7 +22,9 @@ public class RandomizedQueue<T> {
     public void enqueue(T item) {
         if(item == null) throw new java.lang.IllegalArgumentException();
 
-        if (size() == array.length) resize(2 * array.length);
+        if (size() == array.length)
+            resize(2 * array.length);
+
         array[tail] = item;
         tail++;
     }
@@ -31,23 +33,12 @@ public class RandomizedQueue<T> {
     {
         T[] copy = (T[]) new Object[capacity];
 
+        for (int i = head; i < tail; i++)
+            copy[tail - i - 1] = array[i];
 
-
-        try {
-            for (int i = head; i < tail; i++)
-                copy[tail - i - 1] = array[i];
-        }catch (Exception e){
-            System.out.println("tail-head-i:" + tail +"-"+head+"-");
-        }
         array = copy;
 
-        if( isShrinking(capacity) ) {
-            resetIndices();
-        }
-    }
-
-    private boolean isShrinking(int capacity) {
-        return capacity < array.length;
+        resetIndices();
     }
 
     private void resetIndices(){
@@ -67,6 +58,10 @@ public class RandomizedQueue<T> {
 
     private void moveRandomItemToHead() {
         int randomIndex = StdRandom.uniform(head, tail);
+        System.out.println("Index:" + randomIndex);
+        System.out.println("length:" + array.length);
+        System.out.println("tail:" + tail);
+        System.out.println("");
         T currentHead = array[head];
         array[head] = array[randomIndex];
         array[randomIndex] = currentHead;
@@ -76,9 +71,6 @@ public class RandomizedQueue<T> {
         if(isEmpty()) throw new java.util.NoSuchElementException();
 
         int randomIndex = StdRandom.uniform(head, tail);
-        System.out.println("Index:" + randomIndex);
-        System.out.println("lenght:" + array.length);
-        System.out.println("tail:" + tail);
         return array[randomIndex];
     }
 }
