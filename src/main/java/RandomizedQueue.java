@@ -32,17 +32,23 @@ public class RandomizedQueue<T> {
             copy[i] = array[i];
         array = copy;
 
-        updateIndices(capacity);
-    }
-
-    private void updateIndices(int capacity){
-        if(capacity < array.length){
-            tail -= head;
-            head = 0;
+        if( isShrinking(capacity) ) {
+            resetIndices(capacity);
         }
     }
 
+    private boolean isShrinking(int capacity) {
+        return capacity < array.length;
+    }
+
+    private void resetIndices(int capacity){
+        tail -= head;
+        head = 0;
+    }
+
     public T dequeue() {
+        if(isEmpty()) throw new java.util.NoSuchElementException();
+
         moveRandomItemToHead();
         T item = array[head];
         array[head++] = null;
@@ -55,5 +61,13 @@ public class RandomizedQueue<T> {
         T currentHead = array[head];
         array[head] = array[randomIndex];
         array[randomIndex] = currentHead;
+    }
+
+    public T sample() {
+        if(isEmpty()) throw new java.util.NoSuchElementException();
+
+        int randomIndex = StdRandom.uniform(head, tail);
+
+        return array[randomIndex];
     }
 }

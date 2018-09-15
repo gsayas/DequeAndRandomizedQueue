@@ -44,6 +44,45 @@ public class RandomizedQueueTest {
     }
 
     @Test
+    public void testDequeueWhenEmpty() {
+        assertTrue(queue.isEmpty());
+
+        try {
+            String s = queue.dequeue();
+            assertEquals(true, false);
+        } catch (Exception e) {
+            assertEquals(java.util.NoSuchElementException.class, e.getClass());
+        }
+
+    }
+
+    @Test
+    public void testSampleWhenEmpty() {
+        assertTrue(queue.isEmpty());
+
+        try {
+            String s = queue.sample();
+            assertEquals(true, false);
+        } catch (Exception e) {
+            assertEquals(java.util.NoSuchElementException.class, e.getClass());
+        }
+
+    }
+
+    @Test
+    public void testSampleWhenNotEmpty() {
+        queue.enqueue("item1");
+        assertFalse(queue.isEmpty());
+
+        queue.enqueue("item2");
+        assertEquals(2, queue.size());
+
+        String s = queue.sample();
+        assertEquals(5, s.length());
+        //assertEquals("item1", s);
+    }
+
+    @Test
     public void testDequeueWhenNotEmpty() {
         queue.enqueue("item1");
         assertFalse(queue.isEmpty());
