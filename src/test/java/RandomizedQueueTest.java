@@ -79,7 +79,6 @@ public class RandomizedQueueTest {
 
         String s = queue.sample();
         assertEquals(5, s.length());
-        //assertEquals("item1", s);
     }
 
     @Test
@@ -104,24 +103,36 @@ public class RandomizedQueueTest {
         assertEquals(2, queue.size());
 
         queue.enqueue("item3");
-        assertEquals(3, queue.size());
-
         queue.enqueue("item4");
-        assertEquals(4, queue.size());
-
         queue.enqueue("item5");
-        assertEquals(5, queue.size());
-
         queue.enqueue("item6");
-        assertEquals(6, queue.size());
-
         queue.enqueue("item7");
-        assertEquals(7, queue.size());
-
         queue.enqueue("item8");
-        assertEquals(8, queue.size());
 
         queue.enqueue("item9");
         assertEquals(9, queue.size());
+    }
+
+    @Test
+    public void testBigDequeue() {
+        queue.enqueue("item0");
+        queue.enqueue("item1");
+        queue.enqueue("item2");
+        queue.enqueue("item3");
+        queue.enqueue("item4");
+        queue.enqueue("item5");
+        queue.enqueue("item6");
+        queue.enqueue("item7");
+        queue.enqueue("item8");
+        queue.enqueue("item9");
+        assertEquals(10, queue.size());
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
+        assertEquals(3, queue.size());
     }
 }

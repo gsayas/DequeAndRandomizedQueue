@@ -23,15 +23,22 @@ public class RandomizedQueue<T> {
         if(item == null) throw new java.lang.IllegalArgumentException();
 
         if (size() == array.length) resize(2 * array.length);
-        array[tail++] = item;
+        array[tail] = item;
+        tail++;
     }
 
     private void resize(int capacity)
     {
         T[] copy = (T[]) new Object[capacity];
 
-        for (int i = head; i < tail; i++)
-            copy[tail-i] = array[i];
+
+
+        try {
+            for (int i = head; i < tail; i++)
+                copy[tail - i - 1] = array[i];
+        }catch (Exception e){
+            System.out.println("tail-head-i:" + tail +"-"+head+"-");
+        }
         array = copy;
 
         if( isShrinking(capacity) ) {
@@ -69,7 +76,9 @@ public class RandomizedQueue<T> {
         if(isEmpty()) throw new java.util.NoSuchElementException();
 
         int randomIndex = StdRandom.uniform(head, tail);
-
+        System.out.println("Index:" + randomIndex);
+        System.out.println("lenght:" + array.length);
+        System.out.println("tail:" + tail);
         return array[randomIndex];
     }
 }
