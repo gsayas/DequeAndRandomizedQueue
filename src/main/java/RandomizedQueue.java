@@ -3,7 +3,7 @@ import java.util.Iterator;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
-    Item[] array;
+    private Item[] array;
     private int head, tail;
 
     public RandomizedQueue(){
@@ -23,8 +23,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public void enqueue(Item item) {
         if(item == null) throw new java.lang.IllegalArgumentException();
 
-        if (size() == array.length)
+        if (size() == array.length) {
             resize(2 * array.length);
+        }else if(tail >= array.length){
+            resize(2 * size());
+        }
 
         array[tail] = item;
         tail++;
@@ -52,7 +55,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         moveRandomItemToHead();
         Item item = array[head];
-        array[head++] = null;
+        array[head] = null;
+        head++;
+        if(size()==0) resetIndices();
         if (size() > 0 && size() == array.length/4) resize(array.length/2);
         return item;
     }

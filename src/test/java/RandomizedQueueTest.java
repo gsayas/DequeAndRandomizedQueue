@@ -118,6 +118,7 @@ public class RandomizedQueueTest {
     @Test
     public void testBigDequeue() {
         queue.enqueue("item0");
+        queue.dequeue();
         queue.enqueue("item1");
         queue.enqueue("item2");
         queue.enqueue("item3");
@@ -127,6 +128,8 @@ public class RandomizedQueueTest {
         queue.enqueue("item7");
         queue.enqueue("item8");
         queue.enqueue("item9");
+        assertEquals(9, queue.size());
+        queue.enqueue("item0");
         assertEquals(10, queue.size());
         queue.dequeue();
         queue.dequeue();
@@ -143,6 +146,26 @@ public class RandomizedQueueTest {
         queue.dequeue();
         assertEquals(0, queue.size());
         assertTrue(queue.isEmpty());
+    }
+
+    @Test
+    public void testEnqueueDequeue() {
+        queue.enqueue("item0");
+        queue.dequeue();
+        queue.enqueue("item1");
+        queue.enqueue("item2");
+        queue.enqueue("item3");
+        queue.enqueue("item4");
+        queue.dequeue();
+        queue.enqueue("item5");
+        queue.enqueue("item6");
+        queue.enqueue("item7");
+        queue.enqueue("item8");
+        queue.enqueue("item9");
+        queue.enqueue("item9");
+        assertEquals(9, queue.size());
+        queue.enqueue("item0");
+        assertEquals(10, queue.size());
     }
 
     @Test
