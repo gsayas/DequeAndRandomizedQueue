@@ -1,15 +1,13 @@
 import edu.princeton.cs.algs4.StdRandom;
-
 import java.util.Iterator;
-import edu.princeton.cs.algs4.StdRandom;
 
-public class RandomizedQueue<T> implements Iterable<T> {
+public class RandomizedQueue<Item> implements Iterable<Item> {
 
-    T[] array;
+    Item[] array;
     private int head, tail;
 
     public RandomizedQueue(){
-        array = (T[]) new Object[1];
+        array = (Item[]) new Object[1];
         head = 0;
         tail = 0;
     }
@@ -22,7 +20,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
         return tail - head;
     }
 
-    public void enqueue(T item) {
+    public void enqueue(Item item) {
         if(item == null) throw new java.lang.IllegalArgumentException();
 
         if (size() == array.length)
@@ -34,7 +32,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
 
     private void resize(int capacity)
     {
-        T[] copy = (T[]) new Object[capacity];
+        Item[] copy = (Item[]) new Object[capacity];
 
         for (int i = head, j= 0; i < tail; i++, j++)
             copy[j] = array[i];
@@ -49,11 +47,11 @@ public class RandomizedQueue<T> implements Iterable<T> {
         head = 0;
     }
 
-    public T dequeue() {
+    public Item dequeue() {
         if(isEmpty()) throw new java.util.NoSuchElementException();
 
         moveRandomItemToHead();
-        T item = array[head];
+        Item item = array[head];
         array[head++] = null;
         if (size() > 0 && size() == array.length/4) resize(array.length/2);
         return item;
@@ -61,29 +59,29 @@ public class RandomizedQueue<T> implements Iterable<T> {
 
     private void moveRandomItemToHead() {
         int randomIndex = StdRandom.uniform(head, tail);
-        T currentHead = array[head];
+        Item currentHead = array[head];
         array[head] = array[randomIndex];
         array[randomIndex] = currentHead;
     }
 
-    public T sample() {
+    public Item sample() {
         if(isEmpty()) throw new java.util.NoSuchElementException();
 
         int randomIndex = StdRandom.uniform(head, tail);
         return array[randomIndex];
     }
 
-    public Iterator<T> iterator() {
+    public Iterator<Item> iterator() {
         return new RandomIterator();
     }
 
-    private class RandomIterator implements Iterator<T> {
+    private class RandomIterator implements Iterator<Item> {
 
-        private T[] iteratorArray;
+        private Item[] iteratorArray;
         private int currentIndex;
 
         public RandomIterator() {
-            iteratorArray = (T[]) new Object[size()];
+            iteratorArray = (Item[]) new Object[size()];
             currentIndex = -1;
 
             for (int i = head, j = 0; i < tail; i++, j++)
@@ -98,10 +96,10 @@ public class RandomizedQueue<T> implements Iterable<T> {
         }
 
         @Override
-        public T next() {
+        public Item next() {
             if(hasNext()) {
                 currentIndex++;
-                T item = iteratorArray[currentIndex];
+                Item item = iteratorArray[currentIndex];
                 return item;
             }else{
                 throw new java.util.NoSuchElementException();

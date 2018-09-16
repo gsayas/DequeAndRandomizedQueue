@@ -1,9 +1,9 @@
 import java.util.Iterator;
 
-public class Deque<T> implements Iterable<T> {
+public class Deque<Item> implements Iterable<Item> {
 
     private class Node {
-        T item;
+        Item item;
         Node next;
         Node previous;
     }
@@ -22,7 +22,7 @@ public class Deque<T> implements Iterable<T> {
         return size;
     }
 
-    public void addFirst(T item) {
+    public void addFirst(Item item) {
         if(item == null){
             throw new java.lang.IllegalArgumentException();
         }
@@ -43,7 +43,7 @@ public class Deque<T> implements Iterable<T> {
         size++;
     }
 
-    public void addLast(T item) {
+    public void addLast(Item item) {
         if(item == null){
             throw new java.lang.IllegalArgumentException();
         }
@@ -55,7 +55,7 @@ public class Deque<T> implements Iterable<T> {
         }
     }
 
-    private void addLastWhenNotEmpty(T item){
+    private void addLastWhenNotEmpty(Item item){
         Node oldLast = last;
 
         last = new Node();
@@ -69,7 +69,7 @@ public class Deque<T> implements Iterable<T> {
     }
 
 
-    public T removeFirst() {
+    public Item removeFirst() {
         if(isEmpty()){
             throw new java.util.NoSuchElementException();
         }else{
@@ -87,7 +87,7 @@ public class Deque<T> implements Iterable<T> {
         }
     }
 
-    public T removeLast() {
+    public Item removeLast() {
         if(isEmpty()){
             throw new java.util.NoSuchElementException();
         }else{
@@ -109,19 +109,19 @@ public class Deque<T> implements Iterable<T> {
         return size() == 0;
     }
 
-    public Iterator<T> iterator(){
+    public Iterator<Item> iterator(){
         return new ListIterator();
     }
 
-    private class ListIterator implements Iterator<T>
+    private class ListIterator implements Iterator<Item>
     {
         private Node current = first;
         public boolean hasNext() { return current != null; }
         public void remove() { throw new java.lang.UnsupportedOperationException(); }
-        public T next()
+        public Item next()
         {
             if(hasNext()) {
-                T item = current.item;
+                Item item = current.item;
                 current = current.next;
                 return item;
             }else{
